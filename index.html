@@ -15,7 +15,10 @@
 <body>
     <div id="map-container">
         <div id="input-area">
-            <textarea id="coordinates" placeholder="Enter UTM coordinates (e.g. Zone Easting Northing) one per line..."></textarea>
+
+            <textarea id="coordinates" placeholder="Enter UTM coordinates (e.g. Zone Easting Northing) one per line..." rows="50"></textarea>
+            <input type="text" id="regexInput" placeholder="Enter your regex here" />
+
             <div id="buttons">
                 <button onclick="btnGenerateGPX()">Download GPX</button>
                 <button onclick="btnPlotOnMap()">Plot on Map</button>

@@ -3,6 +3,7 @@ body { margin: 0; display: flex; height: 100vh; flex-direction: column; }
 
 #input-area { width: 50%; padding: 10px; display: flex; flex-direction: column; z-index: 1000; background: white; }
 #coordinates { flex-grow: 1; width: 100%; }
+#coordinates-regextest { flex-grow: 1; width: 100%; }
 #buttons { margin-top: 10px; }
 
 #map-area { width: 50%; padding: 10px; display: flex; flex-direction: column; z-index: 1000; background: white; }
@@ -10,4 +11,3 @@ body { margin: 0; display: flex; height: 100vh; flex-direction: column; }
 #info { margin-top: 10px; }
 
 #gpxFileInput {display: none}
-
