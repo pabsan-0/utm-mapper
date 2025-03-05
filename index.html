@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTM Coordinate Mapper</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="./thirdparty/leaflet.js"></script>
+    <script src="./thirdparty/togpx.js"></script>
+    <script src="./thirdparty/proj4.js"></script>
+    <script src="./thirdparty/GPXParser.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="map-container">
+        <div id="input-area">
+            <textarea id="coordinates" placeholder="Enter UTM coordinates (e.g. Zone Easting Northing) one per line..."></textarea>
+            <div id="buttons">
+                <button onclick="btnGenerateGPX()">Download GPX</button>
+                <button onclick="btnPlotOnMap()">Plot on Map</button>
+
+                <input type="file" id="gpxFileInput" accept=".gpx" style="display: none;">
+                <button id="gpxUploadButton">Load GPX</button>
+
+            </div>
+        </div>
+
+        <div id="map-area">
+            <div id="map"></div>
+            <div id="info">Mouse: -, - | Center: -, - | Zoom: - | Datum: WGS84</div>
+        </div>
+
+    </div>
+    
+    <script src="index.js"></script>
+</body>
+</html>
+
