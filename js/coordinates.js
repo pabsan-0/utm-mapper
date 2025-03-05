@@ -2,7 +2,7 @@ const regexInput = document.getElementById("regexInput");
 const coordinatesTextArea = document.getElementById("coordinates");
 const regexOverlay = document.getElementById("regex-overlay");
 
-let coordinateParsingRegex = "([0-9]+[A-Z]?)\\s+([0-9]+)\\s+([0-9]+)"
+let coordinateParsingRegex = "\\w+:?\\s*(\\d+)\\w?\\s+(\\d+)\\s+(\\d+)"
 regexInput.value = coordinateParsingRegex
 
 function parseUtmCoordinates(lines) {
