@@ -9,6 +9,8 @@
     <script src="./thirdparty/togpx.js"></script>
     <script src="./thirdparty/proj4.js"></script>
     <script src="./thirdparty/GPXParser.js"></script>
+    <script src="./thirdparty/L.Control.MapCenterCoord.min.js"></script>
+    <link rel="stylesheet" href="thirdparty/L.Control.MapCenterCoord.min.css">
 
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -16,10 +18,10 @@
     <div id="map-container">
         <div id="input-area">
 
-            <textarea id="coordinates" placeholder="Enter UTM coordinates (e.g. Zone Easting Northing) one per line..." rows="50"></textarea>
+            <textarea id="coordinates" spellcheck="false" placeholder="Refresh page to load default text here!" rows="50"></textarea>
             <div id="regex-overlay"></div>
 
-            <input type="text" id="regexInput" placeholder="Enter your regex here" />
+            <input type="text" id="regexInput" placeholder="Refresh page to load default regex!" />
 
             <div id="buttons">
                 <button onclick="btnGenerateGPX()">Download GPX</button>
@@ -32,8 +34,18 @@
         </div>
 
         <div id="map-area">
-            <div id="map"></div>
-            <div id="info">Mouse: -, - | Center: -, - | Zoom: - | Datum: WGS84</div>
+            <div id="map"> </div>
+
+            <div class="info-container">
+                <div class="info-row" id="info-top">
+                    <span class="left">Mouse: -, -</span>
+                    <span class="right">Zoom: -</span>
+                </div>
+                <div class="info-row" id="info-bot">
+                    <span class="left">Center: -, -</span>
+                    <span class="right">Datum: WGS84</span>
+                </div>
+            </div>
         </div>
 
     </div>

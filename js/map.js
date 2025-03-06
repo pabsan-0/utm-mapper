@@ -29,19 +29,26 @@ function coordinatesDraw() {
     }
 }
 
+const zoomLevelDisplay = document.querySelector("#info-top .right")
+const cursorCoordsDisplay = document.querySelector("#info-top .left")
+const centerCoordsDisplay = document.querySelector("#info-bot .left")
 
 function updateMapInfo(e) {
-    const center = map.getCenter();
     const zoom = map.getZoom();
+
+    const center = map.getCenter();
     const utm = latLngToUTM(center.lat, center.lng);
-    let mouseUTM = "-";
+    centerUTM = `${utm.zone} ${utm.easting} ${utm.northing}`;
+
+    let cursorUTM = "-";
     if (e) {
         const mouse = latLngToUTM(e.latlng.lat, e.latlng.lng);
-        mouseUTM = `${mouse.zone} ${Math.round(mouse.easting)} ${Math.round(mouse.northing)}`;
+        cursorUTM = `${mouse.zone} ${Math.round(mouse.easting)} ${Math.round(mouse.northing)}`;
     }
 
-    // centerUTM = `| Center: ${utm.zone} ${utm.easting} ${utm.northing}`;
-    document.getElementById("info").innerText = `Mouse: ${mouseUTM}  | Zoom: ${zoom} | Datum: ETRS89`;
+    zoomLevelDisplay.innerText = `Zoom level: ${zoom}`
+    cursorCoordsDisplay.innerText = `Cursor: ${cursorUTM}`
+    centerCoordsDisplay.innerText = `Center: ${centerUTM}`
 }
 
 
@@ -49,6 +56,9 @@ function updateMapInfo(e) {
 map.setView([40, -3], 5);
 layer.addTo(map);
 markers.addTo(map);
+
+// External lib cursor
+L.control.mapCenterCoord().addTo(map);
 
 // Map events linked to update function, plus call
 map.on('mousemove', updateMapInfo);

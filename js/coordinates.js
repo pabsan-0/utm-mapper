@@ -2,18 +2,21 @@ const regexInput = document.getElementById("regexInput");
 const coordinatesTextArea = document.getElementById("coordinates");
 const regexOverlay = document.getElementById("regex-overlay");
 
-let coordinateParsingRegex = "\\w+:?\\s*(\\d+)\\w?\\s+(\\d+)\\s+(\\d+)"
+let coordinateParsingRegex = "(\\d+)\\s?\\w?\\s(\\d+)\\w?\\s(\\d+)\\w?"
 regexInput.value = coordinateParsingRegex
 
 function parseUtmCoordinates(lines) {
     const coordinates = [];
-    console.log(coordinateParsingRegex)
+    console.log(`Using regex: '${coordinateParsingRegex}'`)
 
     // Regex: /([0-9]+[A-Z]?)\s+([0-9]+)\s+([0-9]+)\s*:\s*(.*)$/
     lines.forEach(line => {
+        if (!line) return;
+        if (line.startsWith("#")) return;
 
         const match = line.trim().match(coordinateParsingRegex);
         if (!match) {
+            console.log(`Could not parse '${line}' using regex '${coordinateParsingRegex}'`)
             throw new Error("Poorly defined regex, could not parse.");
         }
 
@@ -29,6 +32,7 @@ function parseUtmCoordinates(lines) {
             idx: coordinates.length,
         };
 
+        console.log(`Parsed '${line}': Zone, Easting, Northing==${[zone, easting, northing]}`)
         coordinates.push(coord)
     })
         
@@ -93,8 +97,7 @@ function highlightRegexMatches(regexText) {
     return htmlContent;
 }
 
-// When regex input changes
-regexInput.addEventListener("input", function () {
+function regexPreview() {
     const regexText = regexInput.value.trim();
 
     // If there's no regex input, hide the overlay
@@ -110,7 +113,10 @@ regexInput.addEventListener("input", function () {
 
     // Make the text in the textarea transparent so the overlay is visible
     coordinatesTextArea.style.color = "transparent";
-});
+}
+
+// When regex input changes
+regexInput.addEventListener("input", regexPreview);
 
 // When the regex input is focused, display the overlay with the original text
 regexInput.addEventListener("focus", function () {
@@ -133,6 +139,8 @@ regexInput.addEventListener("focus", function () {
     regexOverlay.style.left = `${rect.left}px`;
     regexOverlay.style.width = `${rect.width}px`;
     regexOverlay.style.height = `${rect.height}px`;
+
+    regexPreview();
 });
 
 // When the regex input loses focus, hide the overlay and reset the text color
